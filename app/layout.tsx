@@ -20,9 +20,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body>
-          <NavBar />
-          {children}
+        <body className="={inter.className}">
+          <main className="flex flex-col min-h-screen bg-secondary">
+            <NavBar />
+            {children}
+          </main>
         </body>
       </html>
     </ClerkProvider>

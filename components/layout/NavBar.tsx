@@ -1,15 +1,13 @@
 "use client";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Container from "../Container";
 
 const NavBar = () => {
   return (
-    <div>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
+    <div className="Sticky top-0 border border-b-primary/10 bg-secondary">
+      <Container>
         <UserButton afterSignOutUrl="/" />
-      </SignedIn>
+      </Container>
     </div>
   );
 };
