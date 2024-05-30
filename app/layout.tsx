@@ -23,7 +23,7 @@ export default function RootLayout({
         <body className="={inter.className}">
           <main className="flex flex-col min-h-screen bg-secondary">
             <NavBar />
-            {children}
+            <section className="flex-grow">{children}</section>
           </main>
         </body>
       </html>
