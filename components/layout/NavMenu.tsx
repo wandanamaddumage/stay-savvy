@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ChevronsUpDown, Hotel, Plus } from "lucide-react";
+import { BookOpenCheck, ChevronsUpDown, Hotel, Plus } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
@@ -25,16 +25,25 @@ export function NavMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => router.push("/hotel/new")}>
+        <DropdownMenuItem
+          className="cursor-pointer flex gap-2 items-center"
+          onClick={() => router.push("/hotel/new")}
+        >
           <Plus size={15} />
           <span>Add Hotel</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => router.push("/my-hotels")}>
+        <DropdownMenuItem
+          className="cursor-pointer flex gap-2 items-center"
+          onClick={() => router.push("/my-hotels")}
+        >
           <Hotel size={15} />
           <span>My Hotels</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => router.push("/my-bookings")}>
-          <Hotel size={15} />
+        <DropdownMenuItem
+          className="cursor-pointer flex gap-2 items-center"
+          onClick={() => router.push("/my-bookings")}
+        >
+          <BookOpenCheck size={15} />
           <span>My Bookings</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
