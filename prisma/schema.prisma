@@ -11,7 +11,78 @@ datasource db {
 }
 
 model Hotel {
-  id    String  @id @default(uuid())
-  userId  String?
-  email String @unique
+  id                  String  @id @default(uuid())
+  userId              String
+  title               String @db.Text
+  description         String @db.LongText
+  image               String
+  country             String
+  state               String
+  city                String
+  locationDescription String @db.LongText
+  gym                 Boolean @default(false)
+  spa                 Boolean @default(false)
+  bar                 Boolean @default(false)
+  laundry             Boolean @default(false)
+  restaurant          Boolean @default(false)
+  shopping            Boolean @default(false)
+  freeParking         Boolean @default(false)
+  bikeRental          Boolean @default(false)
+  movieNignts         Boolean @default(false)
+  swimmingPool        Boolean @default(false)
+  coffeeShop          Boolean @default(false)
+  addedAT DateTime @default(now())
+  updateAT DateTime @default(now())
+  rooms Room[]
+  bookings Booking[]
+
+  @@fulltext([title])
+}
+
+model Room {
+  id                  String  @id @default(uuid())
+  title               String 
+  description         String @db.LongText
+  bedCount            Int @default(0)
+  guestCount          Int @default(0)
+  bathroomCount       Int @default(0)
+  kingBed             Int @default(0)
+  queenBed            Int @default(0)
+  image               String 
+  breakFastPrice      Int 
+  roomPrice           Int
+  roomService         Boolean @default(false)
+  TV                  Boolean @default(false)
+  balcony             Boolean @default(false)
+  freeWIFI            Boolean @default(false)
+  cityView            Boolean @default(false)
+  oceanView           Boolean @default(false)
+  forestView          Boolean @default(false)
+  mountainView        Boolean @default(false)
+  airCondition        Boolean @default(false)
+  soundProofed        Boolean @default(false)
+  hotelId             String
+  
+  Hotel               Hotel? @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+
+  Booking             Booking[]
+
+  @@index([hotelId])
+}
+
+model Booking {
+    id                String  @id @default(uuid())
+    userName          String
+    userId            String    
+    hotelId           String
+    roomId            String
+    startDate         String
+    endDate           String
+
+    Hotel             Hotel? @relation(fields: [hotelId], references: [id])
+    Room              Room? @relation(fields: [roomId], references: [id])
+
+  @@index([hotelId])
+  @@index([roomId])
+
 }
