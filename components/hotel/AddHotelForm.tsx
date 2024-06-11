@@ -15,6 +15,8 @@ import {
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Checkbox } from "../ui/checkbox";
+import { useState } from "react";
+import { UploadButton } from "../uploadthing";
 
 export type HotelWithRooms = Hotel & {
   rooms: Room[];
@@ -52,6 +54,8 @@ const formSchema = z.object({
 });
 
 const AddHotelForm: React.FC<AddHotelFormProps> = ({ hotel }) => {
+  const [image, setImage] = useState<String | undefined>(hotel?.image);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -92,7 +96,7 @@ const AddHotelForm: React.FC<AddHotelFormProps> = ({ hotel }) => {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Hotel Title</FormLabel>
+                    <FormLabel>Hotel Title *</FormLabel>
                     <FormDescription>Provide your hotel name</FormDescription>
                     <FormControl>
                       <Input placeholder="Beach Hotel" {...field} />
@@ -106,7 +110,7 @@ const AddHotelForm: React.FC<AddHotelFormProps> = ({ hotel }) => {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Hotel Description</FormLabel>
+                    <FormLabel>Hotel Description *</FormLabel>
                     <FormDescription>
                       Provide a detailed description of your hotel
                     </FormDescription>
@@ -293,6 +297,40 @@ const AddHotelForm: React.FC<AddHotelFormProps> = ({ hotel }) => {
                   />
                 </div>
               </div>
+              <FormField
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col space-y-3">
+                    <FormLabel>Upload an Image *</FormLabel>
+                    <FormDescription>
+                      Choose an image that will show-case your hotel nicely
+                    </FormDescription>
+                    <FormControl>
+                      {image ? (
+                        <></>
+                      ) : (
+                        <>
+                          <div className="flex flex-col items-center max-w[4000px]">
+                            <UploadButton
+                              endpoint="imageUploader"
+                              onClientUploadComplete={(res) => {
+                                // Do something with the response
+                                console.log("Files: ", res);
+                                alert("Upload Completed");
+                              }}
+                              onUploadError={(error: Error) => {
+                                // Do something with the error.
+                                alert(`ERROR! ${error.message}`);
+                              }}
+                            />
+                          </div>
+                        </>
+                      )}
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
             </div>
             <div className="flex-1 flex flex-col gap-6">part 2</div>
           </div>
