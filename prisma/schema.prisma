@@ -29,7 +29,7 @@ model Hotel {
   shopping            Boolean @default(false)
   freeParking         Boolean @default(false)
   bikeRental          Boolean @default(false)
-  movieNignts         Boolean @default(false)
+  movieNights         Boolean @default(false)
   swimmingPool        Boolean @default(false)
   coffeeShop          Boolean @default(false)
   addedAT DateTime @default(now())
