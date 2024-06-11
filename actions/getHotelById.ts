@@ -14,7 +14,8 @@ export const getHotelById = async (hotelId: string) => {
     if (!hotel) return null;
 
     return hotel;
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error) {
+    console.error("Error fetching hotel by ID:", error);
+    throw error; // Directly re-throw the caught error
   }
 };
