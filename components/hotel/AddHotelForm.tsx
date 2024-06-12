@@ -311,7 +311,7 @@ const AddHotelForm: React.FC<AddHotelFormProps> = ({ hotel }) => {
                         <></>
                       ) : (
                         <>
-                          <div className="flex flex-col items-center max-w[4000px]">
+                          <div className="flex flex-col items-center max-w[4000px] p-12 bottom-2 border-dashed border-primary/50 rounded mt-4">
                             <UploadButton
                               endpoint="imageUploader"
                               onClientUploadComplete={(res) => {
